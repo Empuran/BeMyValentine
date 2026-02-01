@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💘</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: "Poppins", Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+      linear-gradient(rgba(255,0,70,0.45), rgba(255,0,70,0.45)),
+      url("https://images.unsplash.com/photo-1518199266791-5375a83190b7");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .card {
+    position: relative;
+    padding: 60px 80px;
+    width: 700px;
+    max-width: 95%;
+    text-align: center;
+    background: linear-gradient(180deg, #ffffff, #fff0f5);
+    border-radius: 40px;
+    box-shadow: 0 40px 80px rgba(255, 0, 90, 0.35);
+    overflow: hidden;
+  }
+
+  .cupid img {
+    width: 140px;
+    margin-bottom: 14px;
+    animation: float 2s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+    100% { transform: translateY(0); }
+  }
+
+  .hey {
+    font-size: 26px;
+    font-weight: 700;
+    color: #ff2e63;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-size: 38px;
+    margin: 15px 0 50px;
+    color: #222;
+  }
+
+  .buttons {
+    position: relative;
+    height: 220px;
+  }
+
+  button {
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 22px;
+    padding: 22px 70px;
+    transition: transform 0.2s ease, opacity 0.3s ease;
+  }
+
+  #yes, #no {
+    width: 260px;
+  }
+
+  #yes {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #ff2e63, #ff6f91);
+    color: white;
+    box-shadow: 0 20px 40px rgba(255,46,99,0.55);
+  }
+
+  #no {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #d0d5da;
+    color: #333;
+  }
+
+  img.result {
+    width: 360px;
+    border-radius: 18px;
+    margin-top: 25px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  }
+
+  .heart {
+    font-size: 90px;
+    animation: beat 0.7s infinite alternate;
+  }
+
+  @keyframes beat {
+    from { transform: scale(1); }
+    to { transform: scale(1.25); }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+
+  <div class="cupid">
+    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExanp3bGd3dWh1cjNib25lNHJ4bzNsMWFpbHFxdXhwODhtMjZ2cWplMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bDr2n9RpIIvAW6BtbT/giphy.gif">
+  </div>
+
+  <div class="hey">Hey Riya!!</div>
+  <h1>Will you be my Valentine? 💘</h1>
+
+  <div class="buttons" id="playArea">
+    <button id="yes" onclick="yesClicked()">Yes 💖</button>
+    <button id="no">No 😢</button>
+  </div>
+</div>
+
+<script>
+  const noBtn = document.getElementById("no");
+  const playArea = document.getElementById("playArea");
+  const card = document.getElementById("card");
+
+  let hoverCount = 0;
+  let scale = 1;
+
+  function moveNoRandomly() {
+    hoverCount++;
+
+    const area = playArea.getBoundingClientRect();
+    const btn = noBtn.getBoundingClientRect();
+
+    const maxX = area.width - btn.width - 10;
+    const maxY = area.height - btn.height - 10;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    // Shrink ONLY after 5 hovers
+    if (hoverCount > 5) {
+      scale -= 0.15;
+    }
+
+    noBtn.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+
+    // Disappear ONLY after 7 hovers
+    if (hoverCount >= 7) {
+      noBtn.style.opacity = 0;
+      noBtn.style.pointerEvents = "none";
+    }
+  }
+
+  noBtn.addEventListener("mouseenter", moveNoRandomly);
+  noBtn.addEventListener("touchstart", moveNoRandomly);
+
+  function yesClicked() {
+    card.innerHTML = `
+      <div class="heart">❤️</div>
+      <h1>Yayyy!! 🥰</h1>
+      <img class="result" src="om-shanti-om-meme-om-shanti-om.gif">
+      <p style="font-size:24px; margin-top:20px;">
+        You are my Valentine 💕
+      </p>
+    `;
+  }
+</script>
+
+</body>
+</html>
